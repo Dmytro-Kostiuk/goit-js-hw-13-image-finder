@@ -16,7 +16,6 @@ const loadMore = new LoadMoreBtn({
 });
 
 //************************************ */
-let bodyheigth = 0;
 const refs = getRefs();
 
 refs.form.addEventListener('submit', onSearch);
@@ -39,6 +38,7 @@ function onSearch(event) {
 }
 
 function onloadMore() {
+  const bodyheigth = document.documentElement.offsetHeight;
   insertImage();
   setTimeout(() => {
     window.scrollTo({
@@ -53,7 +53,6 @@ function insertImage() {
 
   newApiService.fetchImages().then(data => {
     if (data.length > 0) {
-      bodyheigth = document.documentElement.offsetHeight;
       refs.gallery.insertAdjacentHTML('beforeend', RenderGallery(data));
       loadMore.enable();
     } else {
