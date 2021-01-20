@@ -4,18 +4,25 @@ import RenderGallery from './templates/gallery.hbs';
 import LoadMoreBtn from './js/btn-load-styling';
 import getRefs from './js/refs';
 import notifications from './js/notification';
+import './scss/basicLightbox.min.css';
+import './scss/main.scss';
+import onOpenModal from './js/modal.js';
 
+//********************************** */
 const newApiService = new ApiService();
 const loadMore = new LoadMoreBtn({
   selector: '[data-action="load-more"]',
   hidden: true,
 });
+
+//************************************ */
 let bodyheigth = 0;
 const refs = getRefs();
 
 refs.form.addEventListener('submit', onSearch);
 loadMore.refs.button.addEventListener('click', onloadMore);
-
+refs.gallery.addEventListener('click', onOpenModal);
+//******************************************** */
 function onSearch(event) {
   event.preventDefault();
 
