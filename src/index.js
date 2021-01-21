@@ -50,7 +50,7 @@ function insertImage() {
         loadMore.hide();
       } else loadMore.enable();
       window.scrollTo({
-        top: bodyheigth,
+        top: bodyheigth - 120,
         behavior: 'smooth',
       });
     } else {
