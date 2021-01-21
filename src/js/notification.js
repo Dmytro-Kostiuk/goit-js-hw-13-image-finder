@@ -16,6 +16,12 @@ const notifications = {
       text: 'Please enter a more specific query!',
     });
   },
+  onEndOfQuery() {
+    PNotify.info({
+      title: 'All that is found according to your request',
+      text: '',
+    });
+  },
 
   onError() {
     PNotify.error({

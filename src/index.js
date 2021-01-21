@@ -19,7 +19,7 @@ const loadMore = new LoadMoreBtn({
 const refs = getRefs();
 
 refs.form.addEventListener('submit', onSearch);
-loadMore.refs.button.addEventListener('click', onloadMore);
+loadMore.refs.button.addEventListener('click', insertImage);
 refs.gallery.addEventListener('click', onOpenModal);
 //******************************************** */
 function onSearch(event) {
@@ -37,24 +37,22 @@ function onSearch(event) {
   insertImage();
 }
 
-function onloadMore() {
-  const bodyheigth = document.documentElement.offsetHeight;
-  insertImage();
-  setTimeout(() => {
-    window.scrollTo({
-      top: bodyheigth,
-      behavior: 'smooth',
-    });
-  }, 300);
-}
-
 function insertImage() {
   loadMore.disable();
 
   newApiService.fetchImages().then(data => {
     if (data.length > 0) {
+      const bodyheigth = document.documentElement.offsetHeight;
+
       refs.gallery.insertAdjacentHTML('beforeend', RenderGallery(data));
-      loadMore.enable();
+      if (data.length < 12) {
+        notifications.onEndOfQuery();
+        loadMore.hide();
+      } else loadMore.enable();
+      window.scrollTo({
+        top: bodyheigth,
+        behavior: 'smooth',
+      });
     } else {
       notifications.onIncorrect();
 
