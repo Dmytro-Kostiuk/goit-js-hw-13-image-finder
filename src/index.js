@@ -42,7 +42,7 @@ function insertImage() {
 
   newApiService.fetchImages().then(data => {
     if (data.length > 0) {
-      const bodyheigth = document.documentElement.offsetHeight;
+      const bodyheigth = document.documentElement.offsetHeight - 100;
 
       refs.gallery.insertAdjacentHTML('beforeend', RenderGallery(data));
       if (data.length < 12) {
@@ -50,7 +50,7 @@ function insertImage() {
         loadMore.hide();
       } else loadMore.enable();
       window.scrollTo({
-        top: bodyheigth - 120,
+        top: bodyheigth,
         behavior: 'smooth',
       });
     } else {
